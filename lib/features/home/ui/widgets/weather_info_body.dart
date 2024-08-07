@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sky_cast/features/home/data/models/weather_model.dart';
+import 'package:sky_cast/features/home/logic/get_weather_cubit.dart';
+import 'package:sky_cast/sky_cast.dart';
 
 class WeatherInfoBody extends StatelessWidget {
   const WeatherInfoBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Scaffold(
-        body: Center(
+    WeatherModel weatherModel =
+        BlocProvider.of<GetWeatherCubit>(context).weatherModel!;
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            getThemeColor(weatherModel.weatherCondition, weatherModel.is_day),
+            getThemeColor(weatherModel.weatherCondition, weatherModel.is_day)[300]!,
+            getThemeColor(weatherModel.weatherCondition, weatherModel.is_day)[50]!,
+          ],
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Cairo',
+                weatherModel.cityName,
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'updated at 14:00',
+                'updated at ${weatherModel.time}',
                 style: TextStyle(
                   fontSize: 24.sp,
                 ),
@@ -32,20 +49,19 @@ class WeatherInfoBody extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset(
-                    'assets/images/clear.png',
-                    height: 32.h,
-                    width: 32.w,
+                  Image.network(
+                    'https:${weatherModel.image}',
                   ),
                   Text(
-                    '32°C',
+                    weatherModel.temp.toString().split('.')[0] + '°C',
                     style: TextStyle(
                       fontSize: 32.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'H: 32°C\nL: 32°C',
+                    'H: ${weatherModel.maxTemp.toString().split('.')[0]}°C\n'
+                    'L: ${weatherModel.minTemp.toString().split('.')[0]}°C',
                     style: TextStyle(
                       fontSize: 16.sp,
                     ),
@@ -56,7 +72,7 @@ class WeatherInfoBody extends StatelessWidget {
                 height: 32.w,
               ),
               Text(
-                'Sunny',
+                '${weatherModel.weatherCondition}',
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.bold,

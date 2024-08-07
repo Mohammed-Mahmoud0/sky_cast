@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sky_cast/core/networking/weather_service.dart';
 import 'package:sky_cast/features/home/data/models/weather_model.dart';
+import 'package:sky_cast/features/home/logic/get_weather_cubit.dart';
 import 'package:sky_cast/features/search_for_city/widgets/search_text_field.dart';
 
 class SearchForWeather extends StatelessWidget {
@@ -30,11 +32,8 @@ class SearchForWeather extends StatelessWidget {
             SizedBox(height: 32.h),
             SearchTextField(
               onSubmitted: (value) async {
-                WeatherModel weatherModel =
-                    await WeatherService(Dio()).getWeather(cityName: value);
-                log('********************');
-                log(weatherModel.temp.toString());
-                log('********************');
+                var getWeatherCubit = BlocProvider.of<GetWeatherCubit>(context);
+                getWeatherCubit.getWeather(cityName: value);
                 Navigator.pop(context, value);
               },
             ),
