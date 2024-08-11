@@ -1,16 +1,10 @@
 # sky_cast
 
-A new Flutter project.
+Sky Cast is a Flutter weather app using Cubit for state management. It fetches real-time weather data via API, allowing users to search for a city or use their location to view current conditions.
 
-## Getting Started
+## Screenshots from the app
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://github.com/user-attachments/assets/58f84c2c-cbab-4b10-8d2b-f8bedcc5dbb6" height="400">
+<img src="https://github.com/user-attachments/assets/be9c277c-229c-4821-be14-ee6e3442c7f8" height="400">
+<img src="https://github.com/user-attachments/assets/922ec110-9032-48ee-90af-dad9b4d04fa7" height="400">
+<img src="https://github.com/user-attachments/assets/f22e9b6d-8908-46a2-bcae-3ac2abb1f164" height="400">
